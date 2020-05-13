@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+         <div class="col-lg-8 offset-lg-2">
+             <img th:src="${item.imgUrl}" class="img-fluid" alt="Pizza margherita" />
+             <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                 <h1 th:text="${item.name}" class="text-center"></h1>
+                 <h3 th:text="${item.price}" class="text-center"></h3>
+                 <p th:text="${item.description}"></p>
+
+            <a th:href="@{/order/add/{id}(id=${item.id})}"><button th:type="submit"  class="btn btn-primary btn-lg btn-block">Dodaj do zamowienia</button></a>
+             </div>
+         </div>
+     </div>
+
+
+
+</div>
+</div>
+</body>
+</html>

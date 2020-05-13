@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron home-jumbo">
+  <div class="container text-center text-white jumbo-container">
+  <h1 class="display-1" th:class="text-center">Zamowienie</h1>
+  <a href="#" th:href="@{/}"><p>Strona główna</p></a>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="media col-6 offset-3">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${order.itemList}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+        </tr>
+
+    </tbody>
+
+    </table>
+    </div>
+       <div class="text-right">
+            <h5 th:text="|Do zapłaty: ${#numbers.formatDecimal(price,1,2,'COMMA')}|"></h5>
+       </div>
+
+
+        <div class="media col-6 offset-3">
+            <form action="#" th:action="@{/order/save}"  method="post">
+                 <label for="addressInput">Adres</label>
+                <input type="text" class="form-control" id="addressInput" name="address" placeholder="Ul.Nowa 45/6" />
+                <br>
+                <br>
+                <label for="telephoneInput">Telefon</label>
+                <input type="text"  class="form-control" id="telephoneInput" name="telephone"  placeholder="678689078"/>
+                <br>
+                <br>
+                <button type="submit"  class="btn btn-primary btn-sm">Wyślij zamówienie</button>
+            </form>
+       </div>
+
+</div>
+</div>
+</body>
+</html>

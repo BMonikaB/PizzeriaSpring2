@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron home-jumbo">
+  <div class="container text-center text-white jumbo-container">
+  <h1 class="display-1" th:class="text-center">Zamowienie <span th:text="${order.id}"></span></h1>
+  <h1 class="display-1" th:class="text-center" th:text="${order.status}"></h1>
+  <a href="#" th:href="@{/panel/zamowienia}"><p>Lista zamówien</p></a>
+  </div>
+</div>
+</div>
+
+<div class="container">
+ <table class="table">
+    <thead>
+        <tr>
+            <td>#</td>
+            <th>Nazwa</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item: ${order.itemList}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+        </tr>
+    </tbody>
+</table>
+        <div class="text-right">
+            <h5 th:text="|Do zapłaty: ${#numbers.formatDecimal(suma,1,2,'COMMA')}|"></h5>
+        </div>
+
+      <div class="text-center" th:if="${order.status != T(com.example.kurs.domain.OrderStatus).COMPLETE}">
+                      <form action="#" th:action="@{|/panel/zamowienie/${order.id}|}" method="post">
+                          <button class="btn btn-primary"
+                                  th:if="${order.status == T(com.example.kurs.domain.OrderStatus).NEW}">REALIZUJ</button>
+                          <button class="btn btn-success"
+                                  th:if="${order.status == T(com.example.kurs.domain.OrderStatus).IN_PROGRESS}">Zakończ</button>
+                      </form>
+      </div>
+</div>
+</body>
+</html>

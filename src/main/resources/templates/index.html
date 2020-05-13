@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron home-jumbo">
+  <div class="container text-center text-white jumbo-container">
+  <h1 class="display-1" th:class="text-center">Restauracja Włoska</h1>
+  <p th:class="text-center">Witaj w naszej restauracji. Zamawiaj co chcesz i ile chcesz, a my przygotujemy to dla Ciebie.</p>
+  <a href="#" th:href="@{/order}"><p>Zamowienia</p></a>
+
+  </div>
+  </div>
+
+
+
+<div class="container">
+<div class="media col-6 offset-3" th:each="item : ${items}">
+ <i class="fas fa-utensils"></i>
+ <div class="media-body">
+ <a th:href="@{/find/{name}(name=${item.name})}"><h5 th:text="|${item.name}(${item.price}zl)|"></h5></a>
+        <p th:text="${item.shortDescription}"></p>
+
+
+           <a th:href="@{/order/add/{id}(id=${item.id})}"><button th:type="submit"  class="btn btn-sm btn-primary"  >Dodaj do zamowienia</button></a>
+
+
+  </div>
+  </div>
+  </div>
+
+
+ </div>
+
+
+
+
+  </body>
+</html>

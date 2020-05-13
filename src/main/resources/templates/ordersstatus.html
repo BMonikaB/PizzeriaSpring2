@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron home-jumbo">
+  <div class="container text-center text-white jumbo-container">
+  <h1 class="display-1" th:class="text-center">Zamowienia</h1>
+  </div>
+</div>
+
+
+<div class="container">
+
+<a href="#" th:href="@{/panel/zamowienia(status=${T(com.example.kurs.domain.OrderStatus).NEW.name()})}"><button type="button" class="btn btn-warning">Nowe</button></a>
+<a href="#" th:href="@{/panel/zamowienia(status=${T(com.example.kurs.domain.OrderStatus).IN_PROGRESS.name()})}"><button type="button" class="btn btn-info">W trakcie</button></a>
+<a href="#" th:href="@{/panel/zamowienia(status=${T(com.example.kurs.domain.OrderStatus).COMPLETE.name()})}"><button type="button" class="btn btn-success">Zrealizowane</button></a>
+
+
+    <table class="table">
+    <thead>
+        <tr>
+            <td>#</td>
+            <th>Adres</th>
+            <th>Telefon</th>
+            <th>Status</th>
+            <th>Edycja</th>
+        </tr>
+    </thead>
+    <tbody>
+     <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.address}"></td>
+            <td th:text="${order.telephone}"></td>
+            <td th:text="${order.status}"></td>
+            <td>
+            <a href="#" th:href="@{/panel/zamowienia/{id} (id = ${order.id})}">
+            <button type="button" class="btn btn-primary">Edytuj</button>
+            </a>
+            </td>
+     </tr>
+    </tbody>
+
+    </table>
+
+</div>
+</div>
+</body>
+
+</html>
